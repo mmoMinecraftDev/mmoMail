@@ -26,6 +26,7 @@ public class mail {
 		for (MailDB mlDB : maillist){
 			if(sender.equals(mlDB.getReceiver())){
 				if(!mlDB.getRead()){
+					
 					count++;
 				}
 			}
@@ -43,11 +44,14 @@ public class mail {
 		return true;
 	}
 	public void getMail(Player player)throws Exception{
-		for (MailDB myDB : maillist){
-			if(myDB.getReceiver().equals(player.getName())) {
-				mmo.sendMessage(player, "&aFrom: &c%1$s &a- &c%2$s", myDB.getSender(), myDB.getMessage());
-				myDB.setRead(true);
-				maillist.remove(myDB);
+		for(Iterator<MailDB> it = maillist.iterator(); it.hasNext();){
+			MailDB mdb = it.next();
+			if (mdb.getReceiver().equals(player.getName())) {
+				mmo.sendMessage(player, "&aFrom: &c%1$s &a- &c%2$s", mdb.getSender(), mdb.getMessage());
+				mdb.setRead(true);
+				synchronized (maillist) {
+					it.remove();
+				}
 			}
 		}
 	}
