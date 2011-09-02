@@ -58,6 +58,11 @@
             <artifactId>bukkit</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+		<dependency>
+			<groupId>mmo.Core.mmoCore</groupId>
+			<artifactId>mmoCore</artifactId>
+			<version>dev</version>
+		</dependency>
     </dependencies>
     <artifactId>mmoMail</artifactId>
     <name>mmoMail</name>
