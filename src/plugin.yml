@@ -1,0 +1,12 @@
+name: mmoMail
+main: mmo.Mail.mmoMail
+version: 0.1
+author: FlayaN
+database: true
+depend: [mmoCore]
+description: Simple mail system for players.
+commands:
+  mail:
+    description: Invites, leaves, promotes...
+    aliases: [m,mmomail]
+    usage: /mail help
