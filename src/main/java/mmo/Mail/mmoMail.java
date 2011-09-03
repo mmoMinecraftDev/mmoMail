@@ -50,6 +50,8 @@ public class mmoMail extends MMOPlugin {
 				mmo.sendMessage(player, "&cMail commands:");
 				mmo.sendMessage(player, "/mail write [Player] [Message]");
 				mmo.sendMessage(player, "/mail read");
+				mmo.sendMessage(player, "/mail delete [MailID]");
+				mmo.sendMessage(player, "/mail delete all");
 			} else if (args[0].equalsIgnoreCase("write")){
 				if(args.length >= 3){
 					String receiver = args[1];
@@ -82,6 +84,21 @@ public class mmoMail extends MMOPlugin {
 					}				
 				} else {
 					mmo.sendMessage(player, "No mail found");
+				}
+			}else if (args[0].equalsIgnoreCase("delete")){
+				int mailID = Integer.parseInt(args[1]);
+				if(mailID != 0){
+					try {
+						mail.deleteMail(player.getName() , mailID);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}else if(args[1].equalsIgnoreCase("all")){
+					try {
+						mail.deleteAllMail(player.getName());
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 				}
 			}
 			return true;

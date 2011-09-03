@@ -21,6 +21,9 @@ public class MailDB {
 	@NotNull
 	private String message;
 	
+	@NotNull
+	private int messageID = 0;
+	
 	private boolean read = false;
 
 	public String getSender() {
@@ -53,5 +56,13 @@ public class MailDB {
 
 	public void setRead(boolean read) {
 		this.read = read;
+	}
+
+	public int getMessageID() {
+		return messageID;
+	}
+
+	public void setMessageID(int messageID) {
+		this.messageID = messageID;
 	}
 }
