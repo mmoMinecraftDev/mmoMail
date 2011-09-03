@@ -64,8 +64,8 @@
 			<version>dev</version>
 		</dependency>
     </dependencies>
-    <artifactId>MMOMail</artifactId>
-    <name>MMOMail</name>
+    <artifactId>mmoMail</artifactId>
+    <name>mmoMail</name>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
