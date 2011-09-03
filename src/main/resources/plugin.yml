@@ -1,5 +1,5 @@
 name: mmoMail
-main: mmo.Mail.mmoMail
+main: mmo.Mail.MMOMail
 version: 0.1
 author: FlayaN
 database: true

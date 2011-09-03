@@ -9,32 +9,33 @@ import org.bukkit.entity.Player;
 
 import mmo.Core.MMO;
 
-public class mail {
-	public mmoMail plugin;
+public class Mail {
+
+	public MMOMail plugin;
 	public Server server;
 	public MMO mmo;
 	public ArrayList<MailDB> maillist = new ArrayList<MailDB>();
 	public MailDB mail;
 	public Iterator<MailDB> iterator = null;
 	public int messageid = 0;
-	
-	public mail(mmoMail plugin){
+
+	public Mail(MMOMail plugin) {
 		this.plugin = plugin;
 	}
-	
-	public int getUnreadCount(String sender){
+
+	public int getUnreadCount(String sender) {
 		int count = 0;
-		for (MailDB mlDB : maillist){
-			if(sender.equals(mlDB.getReceiver())){
-				if(!mlDB.getRead()){
+		for (MailDB mlDB : maillist) {
+			if (sender.equals(mlDB.getReceiver())) {
+				if (!mlDB.getRead()) {
 					count++;
 				}
 			}
 		}
 		return count;
 	}
-	
-	public boolean sendMail(String sender, String receiver, String message) throws Exception{
+
+	public boolean sendMail(String sender, String receiver, String message) {
 		messageid++;
 		mail = new MailDB();
 		mail.setSender(sender);
@@ -45,38 +46,31 @@ public class mail {
 		mmo.notify(receiver, "You've got mail!", Material.PAPER);
 		return true;
 	}
-	public void getMail(Player player)throws Exception{
-		for(Iterator<MailDB> it = maillist.iterator(); it.hasNext();){
-			MailDB mdb = it.next();
-			if (mdb.getReceiver().equals(player.getName())) {
-				mmo.sendMessage(player, "%s | &aFrom: &c%s &a- &c%s", Integer.toString(mdb.getMessageID()), mdb.getSender(), mdb.getMessage());
-				//mdb.setRead(true);
-				synchronized (maillist) {
-					//it.remove();
-				}
-			}
-		}
-	}
-	public void deleteMail(String player, int mailID) throws Exception{
-		for(Iterator<MailDB> it = maillist.iterator(); it.hasNext();){
-			MailDB mdb = it.next();
-			if (mdb.getMessageID() == mailID && mdb.getReceiver().equals(player)) {
-				synchronized (maillist) {
-					it.remove();
-					mmo.sendMessage(player, "Successfully removed mail with id: %s", mdb.getMessageID());
-				}
+
+	public void getMail(Player player) {
+		for (MailDB it : new ArrayList<MailDB>(maillist)) {
+			if (it.getReceiver().equals(player.getName())) {
+				mmo.sendMessage(player, "%i | &aFrom: &c%s &a- &c%s", it.getMessageID(), it.getSender(), it.getMessage());
+				//it.setRead(true);
+				//deleteMail(player.getName(), it.getMessageID());
 			}
 		}
 	}
 
-	public void deleteAllMail(String player) throws Exception {
-		for(Iterator<MailDB> it = maillist.iterator(); it.hasNext();){
-			MailDB mdb = it.next();
-			if (mdb.getReceiver().equals(player)) {
-				synchronized (maillist) {
-					it.remove();
-					mmo.sendMessage(player, "Successfully removed all your mails");
-				}
+	public void deleteMail(String player, int mailID) {
+		for (MailDB it : new ArrayList<MailDB>(maillist)) {
+			if (it.getMessageID() == mailID && it.getReceiver().equals(player)) {
+				maillist.remove(it);
+				mmo.sendMessage(player, "Successfully removed mail with id: %i", mailID);
+			}
+		}
+	}
+
+	public void deleteAllMail(String player) {
+		for (MailDB it : new ArrayList<MailDB>(maillist)) {
+			if (it.getReceiver().equals(player)) {
+				maillist.remove(it);
+				mmo.sendMessage(player, "Successfully removed all your mails");
 			}
 		}
 	}
