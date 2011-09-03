@@ -26,7 +26,7 @@ public class Mail {
 	public int getUnreadCount(String sender) {
 		int count = 0;
 		for (MailDB mlDB : maillist) {
-			if (sender.equals(mlDB.getReceiver())) {
+			if (sender.equalsIgnoreCase(mlDB.getReceiver())) {
 				if (!mlDB.getRead()) {
 					count++;
 				}
@@ -49,8 +49,8 @@ public class Mail {
 
 	public void getMail(Player player) {
 		for (MailDB it : new ArrayList<MailDB>(maillist)) {
-			if (it.getReceiver().equals(player.getName())) {
-				mmo.sendMessage(player, "%i | &aFrom: &c%s &a- &c%s", it.getMessageID(), it.getSender(), it.getMessage());
+			if (it.getReceiver().equalsIgnoreCase(player.getName())) {
+				mmo.sendMessage(player, "%d | &aFrom: &c%s &a- &c%s", it.getMessageID(), it.getSender(), it.getMessage());
 				//it.setRead(true);
 				//deleteMail(player.getName(), it.getMessageID());
 			}
@@ -59,16 +59,16 @@ public class Mail {
 
 	public void deleteMail(String player, int mailID) {
 		for (MailDB it : new ArrayList<MailDB>(maillist)) {
-			if (it.getMessageID() == mailID && it.getReceiver().equals(player)) {
+			if (it.getMessageID() == mailID && it.getReceiver().equalsIgnoreCase(player)) {
 				maillist.remove(it);
-				mmo.sendMessage(player, "Successfully removed mail with id: %i", mailID);
+				mmo.sendMessage(player, "Successfully removed mail with id: %d", mailID);
 			}
 		}
 	}
 
 	public void deleteAllMail(String player) {
 		for (MailDB it : new ArrayList<MailDB>(maillist)) {
-			if (it.getReceiver().equals(player)) {
+			if (it.getReceiver().equalsIgnoreCase(player)) {
 				maillist.remove(it);
 				mmo.sendMessage(player, "Successfully removed all your mails");
 			}
