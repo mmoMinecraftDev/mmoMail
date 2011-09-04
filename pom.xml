@@ -65,7 +65,7 @@
     <name>mmoMail</name>
     <artifactId>mmoMail</artifactId>
     <groupId>mmo.Mail.MMOMail</groupId>
-    <url>http://forums.bukkit.org/threads/31054/</url>
+    <url>http://github.com/mmoMinecraftDev/mmoMail</url>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
