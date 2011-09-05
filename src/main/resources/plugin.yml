@@ -2,7 +2,6 @@ name: mmoMail
 main: mmo.Mail.MMOMail
 version: 0.1
 author: FlayaN
-database: true
 depend: [mmoCore]
 description: Simple mail system for players.
 commands:
