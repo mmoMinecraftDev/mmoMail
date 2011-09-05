@@ -18,11 +18,9 @@ package mmo.Mail;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-
 import org.bukkit.Material;
 import org.bukkit.Server;
 import org.bukkit.entity.Player;
-
 import mmo.Core.MMO;
 
 public class Mail {
@@ -59,14 +57,14 @@ public class Mail {
 		mail.setMessage(message);
 		mail.setMessageID(messageid);
 		maillist.add(mail);
-		mmo.notify(receiver, "You've got mail!", Material.PAPER);
+		plugin.notify(receiver, "You've got mail!", Material.PAPER);
 		return true;
 	}
 
 	public void getMail(Player player) {
 		for (MailDB it : new ArrayList<MailDB>(maillist)) {
 			if (it.getReceiver().equalsIgnoreCase(player.getName())) {
-				mmo.sendMessage(player, "%d | &aFrom: &c%s &a- &c%s", it.getMessageID(), it.getSender(), it.getMessage());
+				plugin.sendMessage(player, "%d | &aFrom: &c%s &a- &c%s", it.getMessageID(), it.getSender(), it.getMessage());
 				//it.setRead(true);
 				//deleteMail(player.getName(), it.getMessageID());
 			}
@@ -77,7 +75,7 @@ public class Mail {
 		for (MailDB it : new ArrayList<MailDB>(maillist)) {
 			if (it.getMessageID() == mailID && it.getReceiver().equalsIgnoreCase(player)) {
 				maillist.remove(it);
-				mmo.sendMessage(player, "Successfully removed mail with id: %d", mailID);
+				plugin.sendMessage(player, "Successfully removed mail with id: %d", mailID);
 			}
 		}
 	}
@@ -86,7 +84,7 @@ public class Mail {
 		for (MailDB it : new ArrayList<MailDB>(maillist)) {
 			if (it.getReceiver().equalsIgnoreCase(player)) {
 				maillist.remove(it);
-				mmo.sendMessage(player, "Successfully removed all your mails");
+				plugin.sendMessage(player, "Successfully removed all your mails");
 			}
 		}
 	}

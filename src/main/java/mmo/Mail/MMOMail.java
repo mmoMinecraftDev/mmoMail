@@ -16,42 +16,32 @@
  */
 package mmo.Mail;
 
-import org.bukkit.Server;
+import java.util.ArrayList;
+import java.util.List;
+import mmo.Core.MMOPlugin;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.PluginDescriptionFile;
-import org.bukkit.plugin.PluginManager;
-
-import mmo.Core.MMO;
-import mmo.Core.MMOPlugin;
+import org.bukkit.util.config.Configuration;
 
 public class MMOMail extends MMOPlugin {
 
-	protected static Server server;
-	protected static PluginManager pm;
-	protected static PluginDescriptionFile description;
-	protected static MMO mmo;
-	public Mail mail = new Mail(this);
-
-	public MMOMail() {
-		classes.add(MailDB.class);
-	}
+	public Mail mail;
 
 	@Override
 	public void onEnable() {
-		server = getServer();
-		pm = server.getPluginManager();
-		description = getDescription();
-		mail.mmo = mmo = MMO.create(this);
-		mmo.setPluginName("Mail");
-		mmo.log("loading " + description.getFullName());
-		getDatabase().find(MailDB.class);
+		super.onEnable();
+		mail = new Mail(this);
+//		getDatabase().find(MailDB.class);
+	}
+
+	@Override
+	public void loadConfiguration(Configuration cfg) {	
 	}
 
 	@Override
 	public void onDisable() {
-		mmo.log("Disabled " + description.getFullName());
+		super.onDisable();
 	}
 
 	@Override
@@ -62,13 +52,13 @@ public class MMOMail extends MMOPlugin {
 		Player player = (Player) sender;
 		if (command.getName().equalsIgnoreCase("mail")) {
 			if (args.length == 0) {
-				mmo.sendMessage(player, "/mail help");
+				sendMessage(player, "/mail help");
 			} else if (args[0].equalsIgnoreCase("help")) {
-				mmo.sendMessage(player, "&cMail commands:");
-				mmo.sendMessage(player, "/mail write [Player] [Message]");
-				mmo.sendMessage(player, "/mail read");
-				mmo.sendMessage(player, "/mail delete [MailID]");
-				mmo.sendMessage(player, "/mail delete all");
+				sendMessage(player, "&cMail commands:");
+				sendMessage(player, "/mail write [Player] [Message]");
+				sendMessage(player, "/mail read");
+				sendMessage(player, "/mail delete [MailID]");
+				sendMessage(player, "/mail delete all");
 			} else if (args[0].equalsIgnoreCase("write")) {
 				if (args.length >= 3) {
 					String receiver = args[1];
@@ -84,15 +74,15 @@ public class MMOMail extends MMOPlugin {
 						count++;
 					}
 					mail.sendMail(player.getName(), receiver, message);
-					mmo.sendMessage(player, "Sent message to " + receiver);
+					sendMessage(player, "Sent message to " + receiver);
 				} else {
-					mmo.sendMessage(player, "&c/mail write [Player] [Message]");
+					sendMessage(player, "&c/mail write [Player] [Message]");
 				}
 			} else if (args[0].equalsIgnoreCase("read")) {
 				if (mail.getUnreadCount(player.getName()) >= 1) {
 					mail.getMail(player);
 				} else {
-					mmo.sendMessage(player, "No mail found");
+					sendMessage(player, "No mail found");
 				}
 			} else if (args[0].equalsIgnoreCase("delete")) {
 				if ("all".equalsIgnoreCase(args[1])) {
@@ -104,7 +94,7 @@ public class MMOMail extends MMOPlugin {
 							mail.deleteMail(player.getName(), mailID);
 						}
 					} catch (Exception e) {
-						mmo.sendMessage(player, "Bad mail Id");
+						sendMessage(player, "Bad mail Id");
 					}
 				}
 			} else {
@@ -113,5 +103,12 @@ public class MMOMail extends MMOPlugin {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public List<Class<?>> getDatabaseClasses() {
+		List<Class<?>> list = new ArrayList<Class<?>>();
+		list.add(MailDB.class);
+		return list;
 	}
 }
