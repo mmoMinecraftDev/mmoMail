@@ -19,6 +19,7 @@ package mmo.Mail;
 import java.util.ArrayList;
 import java.util.List;
 import mmo.Core.MMOPlugin;
+import mmo.Core.util.EnumBitSet;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -29,19 +30,19 @@ public class MMOMail extends MMOPlugin {
 	public Mail mail;
 
 	@Override
+	public EnumBitSet mmoSupport(EnumBitSet support) {
+		support.set(Support.MMO_DATABASE);
+		return support;
+	}
+
+	@Override
 	public void onEnable() {
 		super.onEnable();
 		mail = new Mail(this);
-//		getDatabase().find(MailDB.class);
 	}
 
 	@Override
 	public void loadConfiguration(Configuration cfg) {	
-	}
-
-	@Override
-	public void onDisable() {
-		super.onDisable();
 	}
 
 	@Override
