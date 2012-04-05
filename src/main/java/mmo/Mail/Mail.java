@@ -18,13 +18,14 @@ package mmo.Mail;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import mmo.Core.MMO;
+
 import org.bukkit.Material;
 import org.bukkit.Server;
 import org.bukkit.entity.Player;
-import mmo.Core.MMO;
 
 public class Mail {
-
 	public MMOMail plugin;
 	public Server server;
 	public MMO mmo;

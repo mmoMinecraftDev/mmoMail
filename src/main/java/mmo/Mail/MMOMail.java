@@ -18,15 +18,15 @@ package mmo.Mail;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import mmo.Core.MMOPlugin;
 import mmo.Core.util.EnumBitSet;
+
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.util.config.Configuration;
 
 public class MMOMail extends MMOPlugin {
-
 	public Mail mail;
 
 	@Override
@@ -39,10 +39,6 @@ public class MMOMail extends MMOPlugin {
 	public void onEnable() {
 		super.onEnable();
 		mail = new Mail(this);
-	}
-
-	@Override
-	public void loadConfiguration(Configuration cfg) {	
 	}
 
 	@Override

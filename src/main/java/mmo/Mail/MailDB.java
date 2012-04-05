@@ -16,30 +16,26 @@
  */
 package mmo.Mail;
 
-import com.avaje.ebean.validation.NotEmpty;
-import com.avaje.ebean.validation.NotNull;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.avaje.ebean.validation.NotEmpty;
+import com.avaje.ebean.validation.NotNull;
+
 @Entity()
 @Table(name = "mmo_Mail")
 public class MailDB {
-
 	@Id
 	@NotNull
 	@NotEmpty
 	private String sender;
-
 	@NotNull
 	private String receiver;
-
 	@NotNull
 	private String message;
-	
 	@NotNull
 	private int messageID = 0;
-	
 	private boolean read = false;
 
 	public String getSender() {
@@ -57,15 +53,15 @@ public class MailDB {
 	public void setReceiver(String receiver) {
 		this.receiver = receiver;
 	}
-	
+
 	public String getMessage() {
-	return message;
+		return message;
 	}
 
 	public void setMessage(String message) {
-	this.message = message;
+		this.message = message;
 	}
-	
+
 	public boolean getRead() {
 		return read;
 	}
