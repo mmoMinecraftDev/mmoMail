@@ -1,12 +1,14 @@
 name: mmoMail
-main: mmo.Mail.MMOMail
-version: 0.1
-author: FlayaN
-depend: [Spout,mmoCore]
+version: ${releaseVersion} b${buildNumber}
+description: Provides a simply player mail system.
+author: mmoMinecraftDev
+website: http://mmo.me.uk
 
-description: Simple mail system for players.
+main: mmo.Mail.MMOMail
+depend: [Spout, mmoCore]
+
 commands:
-  mail:
-    description: Invites, leaves, promotes...
-    aliases: [m,mmomail]
-    usage: /mail help
+    mail:
+        description: Invites, leaves, promotes...
+        aliases: [m, mmomail]
+        usage: /mail help
