@@ -1,5 +1,5 @@
 name: mmoMail
-version: ${releaseVersion} b${buildNumber}
+version: ${releaseVersion}.${buildNumber}
 description: Provides a simply player mail system.
 author: mmoMinecraftDev
 website: http://mmo.me.uk
